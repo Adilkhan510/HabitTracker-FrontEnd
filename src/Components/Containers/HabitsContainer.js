@@ -15,6 +15,10 @@ class HabitContainer extends Component{
         this.fetchData();
     }
 
+    editHabit = (habitId)=>{
+        console.log(habitId)
+    }
+
     addHabit=(habit)=>{
         axios.post('http://localhost:4000/api/v1/habits/create',{name: `${habit}`}).then(
             (res)=>{
@@ -23,6 +27,23 @@ class HabitContainer extends Component{
                 })
             }
         )
+    }
+
+    updateHabit=(habitId, habitName)=>{
+        axios.put(`http://localhost:4000/api/v1/habits/${habitId}/edit`,{name: habitName}).then(
+            this.setState({
+                Habits : [...this.state.Habits.map(
+                    habit=>{
+                        if(habit._id === habitId){
+                            habit.name = habitName
+                        }
+                        return habit
+                    }
+                )]
+            })
+        ).catch(err=>{
+            console.log(err)
+        })
     }
 
     deleteHabit=(habitId)=>{
@@ -44,7 +65,7 @@ class HabitContainer extends Component{
         return(
             <div>
                 <HabitsForm addHabit={this.addHabit} />
-                <HabitList habits={this.state.Habits} deleteHabit={this.deleteHabit} />                
+                <HabitList habits={this.state.Habits} deleteHabit={this.deleteHabit} editHabit={this.editHabit} updateHabit={this.updateHabit} />                
             </div>
 
         )

@@ -9,7 +9,7 @@ class HabitList extends Component{
                     {
                         this.props.habits.map(habit=>{
                             return(
-                                <Habit habitData={habit} deleteHabit={this.props.deleteHabit} />
+                                <Habit habitData={habit} deleteHabit={this.props.deleteHabit} editHabit={this.props.editHabit} updateHabit={this.props.updateHabit} />
                             )
                         })
                     }
