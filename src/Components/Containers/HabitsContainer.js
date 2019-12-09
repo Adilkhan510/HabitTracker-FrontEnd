@@ -63,7 +63,7 @@ class HabitContainer extends Component{
 
     render(){
         return(
-            <div>
+            <div className="habits-container">
                 <HabitsForm addHabit={this.addHabit} />
                 <HabitList habits={this.state.Habits} deleteHabit={this.deleteHabit} editHabit={this.editHabit} updateHabit={this.updateHabit} />                
             </div>

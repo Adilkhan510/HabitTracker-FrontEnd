@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import './App.css';
 import HabitsContainer from './Components/Containers/HabitsContainer'
-import NavBar from './Components/Navbar/Navbar'
+import Navbar from './Components/Navbar/Navbar'
+import Routes from './config/Routes'
 
-function App() {
-  return (
-    <div className="App">
-      <NavBar />
-      <HabitsContainer />
-    </div>
-  );
+class App extends Component{
+  state = {
+    currentUser: localStorage.getItem('uid'),
+    username: localStorage.getItem('username'),
+  };
+
+  setCurrentUser = (userId, username) => {
+    this.setState({ currentUser: userId, username });
+    localStorage.setItem('uid', userId);
+    localStorage.setItem('username', username);
+  };
+  render() {
+    return(
+      <div className="App">
+        <div>
+          <Navbar />
+          <Routes setCurrentUser={this.setCurrentUser} />
+        </div>
+      </div>
+    )
+  };
 }
 
-export default App;
+export default withRouter(App);
