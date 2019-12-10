@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import habits from './images/habits.png'
 
 export class Home extends Component {
     render() {
         return (
             <div main-page>
-                Welcome to Habits Tracker
+                <div>
+                    <img src={habits} style={{width: "100vw", height: '100vh'}} />
+                </div>
             </div>
         )
     }

@@ -13,7 +13,7 @@ export class HabitsForm extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="habit-form">
                 <form onSubmit={(e)=>{
                         e.preventDefault()
                         this.props.addHabit(this.state.habit)

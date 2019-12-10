@@ -3,12 +3,14 @@ import axios from 'axios';
 // Internal Imports
 import HabitList from '../Habits/HabitsList';
 import HabitsForm from '../Habits/HabitsForm'
+import Chart from './Charts'
 
 class HabitContainer extends Component{
     state={
         user: '',
         Habits : [],
         ajaxloaded : false,
+        HabitsData: ''
     }
     
     componentDidMount(){
@@ -20,7 +22,7 @@ class HabitContainer extends Component{
     }
 
     addHabit=(habit)=>{
-        axios.post('http://localhost:4000/api/v1/habits/create',{name: `${habit}`}).then(
+        axios.post('http://localhost:4000/api/v1/habits/create',{name: `${habit}`, id: localStorage.getItem('uid')}).then(
             (res)=>{
                 this.setState({
                     Habits : [...this.state.Habits, res.data.data]
@@ -64,19 +66,24 @@ class HabitContainer extends Component{
     render(){
         return(
             <div className="habits-container">
-                <HabitsForm addHabit={this.addHabit} />
-                <HabitList habits={this.state.Habits} deleteHabit={this.deleteHabit} editHabit={this.editHabit} updateHabit={this.updateHabit} />                
+                <div className="habits">
+                    <HabitsForm addHabit={this.addHabit} />
+                    <HabitList habits={this.state.Habits} deleteHabit={this.deleteHabit} editHabit={this.editHabit} updateHabit={this.updateHabit} />
+                </div>
+                <div className='chart'>
+                    <Chart habits={this.state.Habits} />
+                </div>
             </div>
 
         )
     }
 
     fetchData =()=>{
-        axios.get('http://localhost:4000/api/v1/habits').then(
+        axios.get(`http://localhost:4000/api/v1/users/${localStorage.getItem('uid')}`).then(
             res=>{
                 console.log(res);
                 this.setState({
-                    Habits : res.data.data,
+                    Habits : res.data.data.habits,
                     ajaxloaded: true
                 })
             }

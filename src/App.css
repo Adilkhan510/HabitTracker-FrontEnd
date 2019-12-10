@@ -1,16 +1,69 @@
+*{
+  font-family: "Raleway", sans-serif
+}
 
 .habits-container{
   display: flex;
-  flex-direction: column;
-  width: 50vw;
+  flex-direction: row;
+  width: 100vw;
   justify-content: space-around;
 }
 
+.habits{
+  display: flex;
+  align-content: left;
+  justify-content: left;
+  flex-direction: column;
+  width: 50vw;
+}
 ul{
   display: flex;
   flex-direction: column;
   height: 600px;
+  width: 100%;
+  margin: auto;
+
 }
 li{
   margin: 10px 0;
+}
+p{
+  font-size: 1.5em;
+}
+
+.habit-delete{
+  background-color: yellow;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.habit-edit{
+  background-color: yellow;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.habit-form{
+  font-size: 2em;
+  margin-left: 20px;
+  margin-top: 20px
+}
+
+.habit-form button{
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.habit-form input{
+  border-radius: 10px;
+}
+
+li:hover{
+  background-color: gold;
+  transition: linear;
+  cursor: pointer;
+}
+
+.checkbox{
+  margin-left: 10px;
 }

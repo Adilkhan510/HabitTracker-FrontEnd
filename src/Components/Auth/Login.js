@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 export class login extends Component {
 
     state = {
         email: '',
         password : '',
+        userLoggedIn : false,
     }
 
     handleChange = (e)=>{
@@ -18,13 +20,19 @@ export class login extends Component {
         e.preventDefault();
         Axios.post('http://localhost:4000/api/v1/login',{email:this.state.email, password: this.state.password}).then(res=>{
             console.log(res)
-            this.props.setCurrentUser(res.data.data.id, res.data.data.token)
+            this.props.setCurrentUser(res.data.id, res.data.token)
+            this.setState({
+                userLoggedIn : true
+            })
         }).catch(err=>{
             console.log(err)
         })
     }
 
     render() {
+        if(this.state.userLoggedIn===true){
+            return <Redirect to='habits' />
+        }
         return (
             <div>
                 <div className="modal-dialog modal-dialog-centered" role="document">
