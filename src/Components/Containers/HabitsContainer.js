@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment'
 // Internal Imports
 import HabitList from '../Habits/HabitsList';
 import HabitsForm from '../Habits/HabitsForm'
-import Chart from './Charts'
+import Chart from './ChartsContainer'
 
 class HabitContainer extends Component{
     state={
@@ -62,13 +63,30 @@ class HabitContainer extends Component{
             }
         )
     }
+    checkboxHandler =(habitId)=>{
+        console.log(habitId)
+        console.log(moment()._d)
+        axios.put(`http://localhost:4000/api/v1/habits/edit/${habitId}`, {"date" : moment()._d}).then(res=>{
+            this.setState({
+                Habits : [...this.state.Habits.map(habit=>{
+                    if(habit._id=== habitId){
+                        habit.daysCompleted= res.data.data.daysCompleted
+                    }
+                    return habit
+                })]
+            })
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
 
     render(){
         return(
             <div className="habits-container">
                 <div className="habits">
                     <HabitsForm addHabit={this.addHabit} />
-                    <HabitList habits={this.state.Habits} deleteHabit={this.deleteHabit} editHabit={this.editHabit} updateHabit={this.updateHabit} />
+                    <HabitList checkboxHandler={this.checkboxHandler} habits={this.state.Habits} deleteHabit={this.deleteHabit} editHabit={this.editHabit} updateHabit={this.updateHabit} />
                 </div>
                 <div className='chart'>
                     <Chart habits={this.state.Habits} />

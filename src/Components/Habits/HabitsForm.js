@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 export class HabitsForm extends Component {
     state = {
-        habit : ''
+        habit : '',
+        placeHolder: ""
     }
 
     changeHandler = (e)=>{
@@ -17,9 +18,12 @@ export class HabitsForm extends Component {
                 <form onSubmit={(e)=>{
                         e.preventDefault()
                         this.props.addHabit(this.state.habit)
+                        this.setState({
+                            habit: ''
+                        })
                     }}>
-                    <input type="text" placeholder="Type Your Goals Here" onChange={this.changeHandler} />
-                    <button >Submit</button>
+                    <input type="text" placeholder="Type Your Goals Here" onChange={this.changeHandler} value={this.state.habit} />
+                    <button ><i class="far fa-share-square"></i></button>
                 </form>
             </div>
         )

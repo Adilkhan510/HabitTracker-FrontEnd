@@ -22,36 +22,24 @@ class Habit extends Component{
         })
     }
 
-    checkboxHandler =()=>{
-        console.log(this.props.habitData._id)
-        console.log(moment()._d)
-        Axios.put(`http://localhost:4000/api/v1/habits/edit/${this.props.habitData._id}`, {"date" : moment()._d}).then(res=>{
-            console.log(res)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-
     render(){
         return(
             this.state.editClicked ? 
-            <form onSubmit={(e)=>{
+            <form className="editing-form" onSubmit={(e)=>{
                         e.preventDefault()
                         this.props.updateHabit(this.props.habitData._id, this.state.habit)
                     this.setState({
                         editClicked : false,
                     })}
                     }>
-                <input type="text" onChange={this.changeHandler}></input>
-                <button>Submit</button>
+                <input className="editing-input" type="text" onChange={this.changeHandler}></input>
+                <button className="editing-submit">Submit</button>
             </form> :
             <li key={this.props.habitData._id}>
-                <p>{this.props.habitData.name}</p>
-            <button className="habit-edit" onClick={()=>{
-                this.editHandler()
-            }}>Edit</button>
-            <button className="habit-delete" onClick={()=>{this.props.deleteHabit(this.props.habitData._id)}}>delete</button>
-            <input type="checkbox" className='checkbox' onClick={this.checkboxHandler} />
+                <p><input type="checkbox" className='checkbox' onClick={()=>{this.props.checkboxHandler(this.props.habitData._id)}} />{"             "}{this.props.habitData.name}</p>
+                <button className="habit-edit" onClick={()=>{
+                    this.editHandler()}}>Edit</button>
+                <button className="habit-delete" onClick={()=>{this.props.deleteHabit(this.props.habitData._id)}}>delete</button>
             </li>
         )
     }
