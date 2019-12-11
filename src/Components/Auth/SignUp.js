@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 export class SignUp extends Component {
@@ -6,6 +7,7 @@ export class SignUp extends Component {
         name : '',
         emailAddress: '',
         password : '',
+        userSignedUp : false,
     }
 
     changeHandler = (e)=>{
@@ -15,13 +17,18 @@ export class SignUp extends Component {
     }
     submitHandler=(e)=>{
         e.preventDefault();
-        axios.post('http://localhost:4000/api/v1/users/create', this.state).then(res=>{
-            console.log(res)
+        axios.post('http://localhost:4000/api/v1/users/create', {"name" : this.state.name, "email": this.state.emailAddress, "password" : this.state.password}).then(res=>{
+            this.setState({
+                userSignedUp : true
+            })
         }).catch(err=>{
             console.log(err)
         })
     }
     render() {
+        if(this.state.userSignedUp===true){
+            return <Redirect to='login' />
+        }
         return (
             <div className="signup">
                 <form className="signup-form" onSubmit={this.submitHandler}>

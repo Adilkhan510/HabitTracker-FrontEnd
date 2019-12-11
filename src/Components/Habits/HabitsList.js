@@ -8,7 +8,7 @@ class HabitList extends Component{
         console.log(moment()._d)
         return(
             <div className="habit-list">
-                <ul><span>Things to do on: Monday</span>
+                <ul><span>Habits to focus on: Wednesday</span> 
                     {
                         this.props.habits.map(habit=>{
                             return(

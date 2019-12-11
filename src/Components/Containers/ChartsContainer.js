@@ -16,7 +16,8 @@ export class Charts extends Component {
                 ],
                 backgroundColor : ['red', 'blue']
             }]
-        }
+        },
+        chartSelected :  ''
     }
 
     render() {
@@ -48,7 +49,7 @@ export class Charts extends Component {
                 '#36A2EB',
                 '#FFCE56',
                 "red",
-                "black",
+                "teal",
                 "green"
                 ],
                 hoverBackgroundColor: [
@@ -63,7 +64,7 @@ export class Charts extends Component {
         // console.log("state",chartData)
         return (
             <div className="charts">
-                <Bar data={data} options={{}} />
+                <Doughnut data={data} options={{}} />
             </div>
         )
     }
