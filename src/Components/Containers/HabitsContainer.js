@@ -66,7 +66,7 @@ class HabitContainer extends Component{
     checkboxHandler =(habitId)=>{
         console.log(habitId)
         console.log(moment()._d)
-        axios.put(`http://localhost:4000/api/v1/habits/edit/${habitId}`, {"date" : moment()._d}).then(res=>{
+        axios.put(`http://localhost:4000/api/v1/habits/edit/${habitId}`, {"date" : moment().format("MMM Do YYYY")}).then(res=>{
             this.setState({
                 Habits : [...this.state.Habits.map(habit=>{
                     if(habit._id=== habitId){

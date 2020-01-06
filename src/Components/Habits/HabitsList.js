@@ -4,11 +4,11 @@ import moment from 'moment';
 
 class HabitList extends Component{
     render(){
-        const date = moment()._d
+        const date = moment().format("MMM Do YYYY");  
         console.log(moment()._d)
         return(
             <div className="habit-list">
-                <ul><span>Habits to focus on: Wednesday</span> 
+                <ul><span>Habits to work on for: {date}</span> 
                     {
                         this.props.habits.map(habit=>{
                             return(
